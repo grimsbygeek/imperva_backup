@@ -1,0 +1,11 @@
+[Unit]
+Description=Imperva Backup Service
+Wants=imperva_backup.timer
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/mkdir -p /opt/imperva/backup
+ExecStartPre=/bin/mkdir -p /var/log/imperva
+ExecStartPre=/bin/chown -R root:root /opt/imperva/backup
+ExecStartPre=/bin/chown -R root:root /var/log/imperva
+ExecStart=/usr/bin/python3 /usr/local/bin/imperva_backup.py
